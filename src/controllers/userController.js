@@ -19,6 +19,19 @@ class UserController {
             res.status(500).json({ error: error.message });
         }
     }
+    async getUserById(req, res) {
+        try {
+            const id = parseInt(req.params.id);
+            const user = await UserService.findUserById(id);
+            if (user) {
+                res.status(200).json(user);
+            } else {
+                res.status(404).json({ error: 'Usuário não encontrado' });
+            }
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
 }
 
 module.exports = new UserController();

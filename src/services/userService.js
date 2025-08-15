@@ -14,6 +14,11 @@ class UserService{
         const users = await userRepository.findAll();
         return users;
     }  
+
+    async findUserById(id){
+        const user = await userRepository.findById(id);
+        return user;
+    }
 }
 
 module.exports = new UserService();
