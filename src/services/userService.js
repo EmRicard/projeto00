@@ -19,6 +19,16 @@ class UserService{
         const user = await userRepository.findById(id);
         return user;
     }
+
+    async updateUser(id, userData){
+        const user = await userRepository.update(id, userData);
+        return user;
+    }
+
+    async deleteUser(id){
+        const user = await userRepository.delete(id);
+        return user;
+    }
 }
 
 module.exports = new UserService();

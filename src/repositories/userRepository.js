@@ -18,6 +18,24 @@ class UserRepository {
     findById(id) {
         return users.find(user => user.id === id);
     }
+
+    update(id, userData) {
+        const user = this.findById(id);
+        if (user) {
+            user.name = userData.name;
+            user.email = userData.email;
+            return user;
+        }
+        return null;
+    }
+
+    delete(id) {
+        const index = users.findIndex(user => user.id === id);
+        if (index !== -1) {
+            return users.splice(index, 1)[0];
+        }
+        return null;
+    }
 }
 
 module.exports = new UserRepository();

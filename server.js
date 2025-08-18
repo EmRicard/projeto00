@@ -23,6 +23,14 @@ app.get('/users/:id', (req, res) => {
   UserController.getUserById(req, res);
 });
 
+app.put('/users/:id', (req, res) => {
+  UserController.updateUser(req, res);
+});
+
+app.delete('/users/:id', (req, res) => {
+  UserController.deleteUser(req, res);
+});
+
 
 app.listen(port, () => {
   console.log(`A API está rodando em http://localhost:${port}`);
