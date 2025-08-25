@@ -1,11 +1,15 @@
 const userRepository = require('../repositories/userRepository');   
+const axios = require('axios');
 
 class UserService{
 
     async createUser(userData){
-        if(!userData.name || !userData.email){
-            throw new Error('Nome e e-mail são obrigatórios.');
+        if(!userData.name || !userData.email || !userData.cep){
+            throw new Error('Nome, e-mail e CEP são obrigatórios.');
         }
+        const cep = userData.cep.replace('-', '');
+        const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`).then(response => {
+        userData.rua = response.data.logradouro;});
         const user = await userRepository.save(userData);
         return user;
     }

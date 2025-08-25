@@ -1,12 +1,13 @@
 const User = require('../models/userModel');
 
 const users = [];
+exports.users = users;
 let currentID = 1;
 
 class UserRepository {
 
     save(userData) {
-        const user = new User(currentID++, userData.name, userData.email);
+        const user = new User(currentID++, userData.name, userData.email, userData.cep, userData.rua);
         users.push(user);
         return user;
     }
@@ -24,6 +25,7 @@ class UserRepository {
         if (user) {
             user.name = userData.name;
             user.email = userData.email;
+            user.cep = userData.cep;
             return user;
         }
         return null;
